@@ -1,0 +1,16 @@
+{
+  "name": "blockchain_demo",
+  "version": "1.0.0",
+  "description": "<h1 align=\"center\"><span style=\"color: green;\">This Could Have Been a Database</span></h1>",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Daisy-Duk3",
+  "license": "ISC",
+  "dependencies": {
+    "crypto-js": "^4.2.0"
+  },
+  "type": "module"
+}

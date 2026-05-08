@@ -1,92 +1,45 @@
-<h1 align="center"><span style="color: green;">This Could Have Been a Database</span></h1>
+# 🧱 Blockchain — Dev Diary
 
-<p align="center">
-  A homemade blockchain project built to understand how blockchains actually work under the hood.
-</p>
-
-<p align="center">
-  Built in JavaScript • Educational • Slightly unnecessary
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/status-learning-blue?style=flat-square" />
-  <img src="https://img.shields.io/badge/javascript-node.js-yellow?style=flat-square" />
-  <img src="https://img.shields.io/badge/purpose-educational-green?style=flat-square" />
-</p>
-
-> ## 🧠 About This Project
->
-> A homemade blockchain project built to understand implementations of blockchains.
->
-> I decided to build one myself in Javascript.
-
----
-## 🛣️ Goals
-
-This project is mainly focused on learning and experimentation.
-
-The plan is to build a small blockchain implementation from scratch while gradually introducing core blockchain concepts such as:
-
-- Block creation
-- Hashing and chain validation
-- Proof-of-Work mining
-- Transactions
-- Wallets and digital signatures
-- Miner rewards
-- Basic networking concepts
-- Possibly an Angular frontend for visualization
+A lightweight personal blockchain built in Node.js using `crypto-js`.  
+This project documents my learning progress while building a basic blockchain from scratch, including classes, hashing logic, and debugging issues.
 
 ---
 
-## ⚙️ Tech Stack
-
-- JavaScript (Node.js)
-- SHA-256 hashing
-- Elliptic curve cryptography (for wallets/signatures)
-- Possibly Angular (for UI visualization)
-
----
-## Planned Workflow
-
-### 1. Build the Blockchain Core
-Create a basic blockchain in Javascript with:
-- Blocks
-- Hashes
-- Chain validation
-- Tamper detection
-
-### 2. Implement Proof-of-Work
-Add a mining system using Proof-of-Work to:
-- Secure the blockchain
-- Prevent spam
-- Make block tampering difficult
-
-### 3. Add Transactions
-Implement basic transactions between wallets.
-
-### 4. Miner Rewards
-Reward miners with newly generated coins when they successfully mine blocks.
-
-### 5. Signed Transactions
-Introduce public/private key cryptography so transactions can only be authorized by wallet owners.
-
-### 6. Refactor & Improve Security
-Refactor the blockchain so it only accepts properly signed transactions.
-
-### 7. Angular Frontend (Possible Future Addition)
-Create a small frontend to visualize:
-- Blocks
-- Transactions
-- Wallet balances
-- Mining activity
-
----
 <details>
-<summary>Disclaimer</summary>
+<summary><strong>📅 08/05/2026 — Day 1: Core Blockchain Structure + Hashing</strong></summary>
 
-## ⚠️ Important Disclaimer
-This is an educational project built to understand how blockchains work internally.
+## 🧠 What I Built Today
 
-It is not secure, not optimized, and definitely not production-ready.
+### 🔹 `Block` Class
+Represents a single block in the chain.
 
-And yes... it could’ve been a database.</details>
+**Purpose:**
+- Stores transaction data
+- Links to the previous block via `previousHash`
+- Generates its own cryptographic hash
+
+**Key function:**
+- `calculateHash()` → creates a SHA256 hash of block contents to ensure immutability
+
+---
+
+### 🔹 `Blockchain` Class
+Manages the full chain of blocks.
+
+**Purpose:**
+- Initializes the chain with a genesis block
+- Adds new blocks securely
+- Ensures each block is linked via hashes
+
+**Key functions:**
+- `createGenesisBlock()` → creates the first block in the chain
+- `getLatestBlock()` → retrieves the most recent block
+- `addBlock()` → assigns `previousHash`, recalculates hash, and appends the block
+
+---
+
+### 🔐 Hashing
+Used `crypto-js`:
+
+```js
+import CryptoJS from 'crypto-js';
