@@ -53,7 +53,7 @@ import CryptoJS from 'crypto-js';
 
 
 <details>
-<summary><strong>📅 09/05/2026 — Day 2: Core Blockchain Structure + Hashing</strong></summary>
+<summary><strong>📅 09/05/2026 — Day 2: Blockchain Validation & Tamper Detection</strong></summary>
 
 ## 🧠 What I Built Today
 
