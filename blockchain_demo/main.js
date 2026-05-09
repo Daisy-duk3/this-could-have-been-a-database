@@ -37,10 +37,34 @@ class Blockchain{
         newBlock.hash = newBlock.calculateHash();
         this.chain.push(newBlock);
     }
+
+    isChainValid(){
+        for(let i = 1; i < this.chain.length; i++){
+            const currentBlock = this.chain[i];
+            const previousBlock = this.chain[i - 1];
+
+            if(currentBlock.hash !== currentBlock.calculateHash()){
+                return false;
+            }
+
+            if(currentBlock.previousHash !== previousBlock.hash){
+                return false;
+            }
+        }
+
+        return true;
+    }
 }
 
-let TrustMeCoin = new Blockchain();
-TrustMeCoin.addBlock(new Block(1, "09/05/2026", { amount: 4 }));
-TrustMeCoin.addBlock(new Block(2, "10/05/2026", { amount: 10 }));
+let BubbaCoin = new Blockchain();
+BubbaCoin.addBlock(new Block(1, "09/05/2026", { amount: 4 }));
+BubbaCoin.addBlock(new Block(2, "10/05/2026", { amount: 10 }));
 
-console.log(JSON.stringify(TrustMeCoin, null, 4))
+console.log('Is blockchain valid? ' + BubbaCoin.isChainValid());
+
+BubbaCoin.chain[1].data = { amount: 100};
+BubbaCoin.chain[1].hash = BubbaCoin.chain[1].calculateHash();
+console.log('Is blockchain valid? ' + BubbaCoin.isChainValid());
+
+
+//console.log(JSON.stringify(BubbaCoin, null, 4))
