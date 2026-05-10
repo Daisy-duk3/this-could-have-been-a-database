@@ -1,6 +1,7 @@
 # 🧱 Blockchain — Dev Diary
 
-A lightweight personal blockchain built in Node.js using `crypto-js`.  
+A lightweight personal 
+blockchain built in Node.js using `crypto-js`.  
 This project documents my learning progress while building a basic blockchain from scratch, including classes, hashing logic, and debugging issues.
 
 ---
@@ -156,3 +157,48 @@ The blockchain can now:
 - simulate tamper protection used in real blockchains
 
 </details>
+
+<details>
+<summary><strong>📅 10/05/2026 — Day 3: Proof of Work</strong></summary>
+
+## 🧠 What I Built Today
+
+### 🔹 Proof of Work
+Introduced a mining system using a `nonce` value and hash difficulty rules.
+
+**Purpose:**
+- Forces blocks to be mined before being added
+- Makes hash generation computationally expensive
+- Simulates real blockchain mining behaviour
+
+**Key additions:**
+- Added `nonce` to the `Block` class
+- Created `mineBlock(difficulty)` function
+- Implemented mining loop until hash starts with required zeros
+
+---
+
+### ⛏️ Mining Difficulty
+Started with a difficulty of `2` and later increased it to `4`.
+
+Added console logs to track the mining process and observe how increasing difficulty affects mining time.
+
+```js
+console.log('Mining block 1...'); 
+BubbaCoin.addBlock(new Block(1, "09/05/2026", { amount: 4 }));
+
+console.log('Mining block 2...'); 
+BubbaCoin.addBlock(new Block(2, "10/05/2026", { amount: 10 })); 
+```
+
+### 🔍 Understanding the Output
+
+When the mining difficulty was set to `2`, valid hashes had to begin with 2 zeros (00).
+![POW_difficulty_2.png](Images/POW_difficulty_2.png)
+---
+
+When the mining difficulty was set to `4`, valid hashes had to begin with 4 zeros (0000).
+![POW_difficulty_4.png](Images/POW_difficulty_4.png)
+---
+
+> This demonstrates how higher difficulty increases the amount of work needed to mine a valid block.
