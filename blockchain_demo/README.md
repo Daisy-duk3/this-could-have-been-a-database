@@ -159,7 +159,7 @@ The blockchain can now:
 </details>
 
 <details>
-<summary><strong>📅 10/05/2026 — Day 3: Proof of Work</strong></summary>
+<summary><strong>📅 10/05/2026 — Day 3: Proof of Work + Transactions</strong></summary>
 
 ## 🧠 What I Built Today
 
@@ -202,3 +202,74 @@ When the mining difficulty was set to `4`, valid hashes had to begin with 4 zero
 ---
 
 > This demonstrates how higher difficulty increases the amount of work needed to mine a valid block.
+
+---
+
+### 🔹 `Transaction` Class
+Introduced a dedicated `Transaction` class to represent transfers between wallet addresses.
+
+**Purpose:**
+- Stores sender address, receiver address, and amount
+- Separates transaction logic from block structure
+- Makes the blockchain easier to scale later
+
+---
+
+### 🔹 Pending Transactions
+Added a `pendingTransactions` array to temporarily store transactions before they are mined into a block.
+
+**Purpose:**
+- Mimics how real blockchains queue transactions
+- Allows multiple transactions to be grouped into a single mined block
+
+---
+
+### ⛏️ Miner Rewards
+Implemented a mining reward system using:
+
+```js
+this.miningReward = 100;
+```
+After a block is mined, the miner receives a reward transaction:
+```js
+new Transaction(null, miningRewardAddress, this.miningReward)
+```
+
+**Purpose:**
+- Simulates how blockchain miners are incentivized
+- null as the sender represents newly generated coins
+
+---
+
+### 🔹 `minePendingTransactions()`
+
+Created a function to:
+- Take all pending transactions
+- Place them into a new block
+- Mine the block using proof of work
+- Reward the miner after successful mining
+
+---
+
+### 🔹 `createTransaction()`
+
+Added a helper function for pushing new transactions into `pendingTransactions`.
+
+**Purpose:**
+- Keeps transaction creation organized
+- Simplifies adding future validation logic
+
+---
+
+### 💰 `getBalanceOfAddress()`
+
+Implemented balance calculation logic by scanning every transaction in the blockchain.
+
+**Purpose:**
+- Calculates a wallet’s balance without storing a separate balance variable
+- Uses transaction history as the single source of truth
+- Mimics how real cryptocurrencies track balances
+
+---
+
+![song_stuck_head.png](Images/song_stuck_head.png)
