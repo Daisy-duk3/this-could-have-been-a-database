@@ -273,3 +273,100 @@ Implemented balance calculation logic by scanning every transaction in the block
 ---
 
 ![song_stuck_head.png](Images/song_stuck_head.png)
+
+</details>
+
+<details>
+<summary><strong>📅 15/05/2026 — Day 4: Digital Signatures + Wallet Security</strong> </summary>
+
+## 🧠 What I Built Today
+
+### 🔹 Project Refactor
+Split the original `main.js` into separate files for better structure and readability.
+
+**New files:**
+- `blockchain.js` → blockchain logic and classes
+- `keygenerator.js` → generates wallet key pairs
+- `main.js` → runs transactions and mining tests
+
+---
+
+### 🔐 Digital Signatures
+Introduced transaction signing using the `elliptic` package and the `secp256k1` curve (used by Bitcoin).
+
+```js
+import elliptic from 'elliptic';
+```
+
+**Purpose:**
+- Proves transaction ownership
+- Prevents users from sending coins they do not own
+- Adds real wallet-style security to the blockchain
+
+---
+
+### 🔑 Wallet Key Generation
+
+Created a separate `keygenerator.js` file to generate:
+- A private key
+- A public key
+
+```js
+const key = ec.genKeyPair();
+```
+Generates:
+- **Private key** is used to sign transactions
+- **Public key** acts as the wallet address
+
+---
+
+### ⚠️ Using the Generated Keys
+
+To create valid transactions:
+1. Run `keygenerator.js`
+2. Copy the generated private key
+3. Paste the private key into `main.js`
+
+```js
+const myKey = ec.keyFromPrivate('');
+```
+
+### 🔹 `signTransaction()` method in `Transaction` class.
+**Purpose:**
+- Cryptographically signs a transaction
+- Confirms the sender owns the wallet
+- Prevents fake transactions
+
+---
+
+### 🔍 `isValid()` method in `Transaction` class.
+**Purpose:**
+- Verifies that a transaction contains a valid digital signature
+- Confirms the signature matches the sender’s public key
+- Detects whether transaction data has been tampered with
+
+This ensures only legitimate signed transactions can be added to the blockchain.
+
+---
+
+### 🔹 `hasValidTransactions()` method inside `Block` class.
+
+**Purpose:**
+- Loops through every transaction stored in a block
+- Checks whether each transaction is valid
+- Rejects blocks containing invalid or tampered transactions
+
+---
+
+### 🛡️ `isChainValid()`
+
+Updated the `isChainValid()` method inside the `Blockchain` class.
+
+The blockchain now verifies:
+- Hash integrity
+- Previous hash links
+- Transaction authenticity
+
+This makes the blockchain significantly more secure than previous versions by validating both the chain structure and transaction legitimacy.
+
+</details>
